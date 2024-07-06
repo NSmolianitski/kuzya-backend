@@ -19,10 +19,10 @@ public class IngredientService(IIngredientRepository ingredientRepository) : IIn
         {
             Name = createIngredientDto.Name,
             AvatarId = createIngredientDto.AvatarId,
-            Calories = createIngredientDto.Calories,
-            Proteins = createIngredientDto.Proteins,
-            Fats = createIngredientDto.Fats,
-            Carbohydrates = createIngredientDto.Carbohydrates
+            Calories = createIngredientDto.Nutrients.Calories,
+            Proteins = createIngredientDto.Nutrients.Proteins,
+            Fats = createIngredientDto.Nutrients.Fats,
+            Carbohydrates = createIngredientDto.Nutrients.Carbohydrates
         };
 
         var createdIngredient = ingredientRepository.Create(ingredient);
@@ -35,10 +35,11 @@ public class IngredientService(IIngredientRepository ingredientRepository) : IIn
             ingredient.Id,
             ingredient.Name,
             ingredient.AvatarId,
-            ingredient.Calories,
-            ingredient.Proteins,
-            ingredient.Fats,
-            ingredient.Carbohydrates
+            new NutrientsDto(
+                ingredient.Calories,
+                ingredient.Proteins,
+                ingredient.Fats,
+                ingredient.Carbohydrates)
         );
     }
 }
