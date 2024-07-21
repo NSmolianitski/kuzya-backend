@@ -5,6 +5,6 @@ namespace KuzyaBackend.Services.Interfaces;
 
 public interface IRecipeService
 {
-    IEnumerable<RecipeDto> GetAllRecipes();
-    RecipeDto CreateRecipe(CreateRecipeDto createRecipeDto);
+    Task<IEnumerable<RecipeDto>> GetAllRecipesAsync();
+    Task<RecipeDto> CreateRecipeAsync(CreateRecipeDto createRecipeDto);
 }

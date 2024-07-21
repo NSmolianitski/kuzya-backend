@@ -9,16 +9,16 @@ namespace KuzyaBackend.Controllers.Recipes;
 public class RecipeController(IRecipeService recipeService)
 {
     [HttpGet]
-    public IActionResult GetAllRecipes()
+    public async Task<IActionResult> GetAllRecipes()
     {
-        var ingredients = recipeService.GetAllRecipes();
+        var ingredients = await recipeService.GetAllRecipesAsync();
         return new JsonResult(ingredients);
     }
     
     [HttpPost]
-    public IActionResult CreateRecipe([FromBody] CreateRecipeDto createRecipeDto)
+    public async Task<IActionResult> CreateRecipe([FromBody] CreateRecipeDto createRecipeDto)
     {
-        var ingredientDto = recipeService.CreateRecipe(createRecipeDto);
+        var ingredientDto = await recipeService.CreateRecipeAsync(createRecipeDto);
         return new CreatedResult(nameof(CreateRecipe), ingredientDto);
     }
 }
