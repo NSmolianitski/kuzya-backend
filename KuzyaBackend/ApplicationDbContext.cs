@@ -18,8 +18,14 @@ public class ApplicationDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        CreateModels(modelBuilder);
+        AddTestingData(modelBuilder);
+    }
+
+    private void CreateModels(ModelBuilder modelBuilder)
+    {
         modelBuilder.Entity<Recipe>()
-            .HasMany(r => r.Ingredients)
+            .HasMany(r => r.RecipeIngredients)
             .WithOne(i => i.Recipe)
             .HasForeignKey(i => i.RecipeId).IsRequired();
         
@@ -28,9 +34,17 @@ public class ApplicationDbContext : DbContext
             .WithOne(step => step.Recipe)
             .HasForeignKey(step => step.RecipeId).IsRequired();
         
-        AddTestingData(modelBuilder);
-    }
+        modelBuilder.Entity<RecipeIngredient>()
+            .HasOne(ri => ri.Ingredient)
+            .WithMany()
+            .HasForeignKey(ri => ri.IngredientId).IsRequired();
 
+        modelBuilder.Entity<RecipeIngredient>()
+            .HasOne(ri => ri.Measure)
+            .WithMany()
+            .HasForeignKey(ri => ri.MeasureId).IsRequired();
+    }
+    
     private void AddTestingData(ModelBuilder modelBuilder)
     {
         var apple = new Ingredient
@@ -63,61 +77,36 @@ public class ApplicationDbContext : DbContext
             GramRatio = 1
         };
         modelBuilder.Entity<Measure>().HasData(grams);
+
+        var recipe = new Recipe
+        {
+            Id = 1,
+            Name = "Apple Pie",
+            AvatarId = 1,
+            CookingTimeInMinutes = 50,
+            Servings = 2,
+            Calories = 100,
+            Proteins = 10,
+            Fats = 10,
+            Carbohydrates = 10
+        };
+        modelBuilder.Entity<Recipe>().HasData(recipe);
         
-        modelBuilder.Entity<Recipe>()
-            .HasData(
-                new Recipe
-                {
-                    Id = 1,
-                    Name = "Apple Pie",
-                    AvatarId = 1,
-                    
-                    CookingTimeInMinutes = 50,
-                    Servings = 2,
-                    
-                    Ingredients =
-                    {
-                        new RecipeIngredient { Id = 1,Ingredient = apple, Measure = grams, Amount = 800f } 
-                    },
-                    
-                    RecipeSteps =
-                    {
-                        new RecipeStep { Id = 1, Order = 1, Description = "Cut the apple" },
-                        new RecipeStep { Id = 2, Order = 2, Description = "Make the pie" }
-                    },
-                    
-                    Calories = 100,
-                    Proteins = 10,
-                    Fats = 10,
-                    Carbohydrates = 10
-                },
-                new Recipe
-                {
-                    Id = 2,
-                    Name = "Banana Pie",
-                    AvatarId = 1,
-                    
-                    CookingTimeInMinutes = 30,
-                    Servings = 10,
-                    
-                    Ingredients =
-                    {
-                        new RecipeIngredient { Id = 2, Ingredient = apple, Measure = grams, Amount = 350f }, 
-                        new RecipeIngredient { Id = 3, Ingredient = banana, Measure = grams, Amount = 2500f }
-                    },
-                    
-                    RecipeSteps =
-                    {
-                        new RecipeStep { Id = 3, Order = 1, Description = "Cut the banana" },
-                        new RecipeStep { Id = 4, Order = 2, Description = "Cut the apple" },
-                        new RecipeStep { Id = 5, Order = 3, Description = "Make the pie" }
-                    },
-                    
-                    Calories = 200,
-                    Proteins = 5,
-                    Fats = 1,
-                    Carbohydrates = 20
-                }
-            );
+        var recipeIngredient = new RecipeIngredient
+        {
+            Id = 1,
+            RecipeId = recipe.Id,
+            IngredientId = apple.Id,
+            MeasureId = grams.Id,
+            Amount = 800f
+        };
+        modelBuilder.Entity<RecipeIngredient>().HasData(recipeIngredient);
+        
+        var recipeSteps = new[]
+        {
+            new RecipeStep {Id = 1, RecipeId = recipe.Id, Order = 1, Description = "Cut the apple"},
+            new RecipeStep {Id = 2, RecipeId = recipe.Id, Order = 2, Description = "Make the pie"}
+        };
+        modelBuilder.Entity<RecipeStep>().HasData(recipeSteps);
     }
 }
