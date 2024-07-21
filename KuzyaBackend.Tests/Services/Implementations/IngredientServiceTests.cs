@@ -5,7 +5,7 @@ using Kuzya_Backend.Repositories.Interfaces;
 using Kuzya_Backend.Services.Implementations;
 using Moq;
 
-namespace KuzyaBackend.Tests.Services.Interfaces;
+namespace KuzyaBackend.Tests.Services.Implementations;
 
 public class IngredientServiceTests
 {
