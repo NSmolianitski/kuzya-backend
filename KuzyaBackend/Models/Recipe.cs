@@ -9,8 +9,8 @@ public class Recipe
     public int CookingTimeInMinutes { get; set; }
     public int Servings { get; set; }
 
-    public List<RecipeIngredient> Ingredients { get; set; } = [];
-    public List<RecipeStep> RecipeSteps { get; set; } = [];
+    public ICollection<RecipeIngredient> RecipeIngredients { get; set; } = [];
+    public ICollection<RecipeStep> RecipeSteps { get; set; } = [];
     
     // Nutrients
     public double Calories { get; set; }
