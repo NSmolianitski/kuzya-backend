@@ -1,8 +1,8 @@
-﻿using KuzyaBackend.Models;
-using KuzyaBackend.Repositories.Interfaces;
+﻿using Kuzya_Backend.Models;
+using Kuzya_Backend.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-namespace KuzyaBackend.Repositories.Implementations;
+namespace Kuzya_Backend.Repositories.Implementations;
 
 public class RecipeRepository(ApplicationDbContext db) : IRecipeRepository
 {

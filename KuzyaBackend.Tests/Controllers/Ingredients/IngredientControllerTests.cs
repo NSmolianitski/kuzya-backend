@@ -1,11 +1,12 @@
-﻿using KuzyaBackend.Controllers;
-using KuzyaBackend.Controllers.Dto;
-using KuzyaBackend.Controllers.Dto.Responses;
-using KuzyaBackend.Services.Interfaces;
+﻿using Kuzya_Backend.Controllers.Dto;
+using Kuzya_Backend.Controllers.Ingredients;
+using Kuzya_Backend.Controllers.Ingredients.Dto.Requests;
+using Kuzya_Backend.Controllers.Ingredients.Dto.Responses;
+using Kuzya_Backend.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 
-namespace KuzyaBackend.Tests.Controllers;
+namespace KuzyaBackend.Tests.Controllers.Ingredients;
 
 public class IngredientControllerTests
 {

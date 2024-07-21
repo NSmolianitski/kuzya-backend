@@ -1,8 +1,8 @@
-﻿using KuzyaBackend.Controllers.Recipes.Dto.Requests;
-using KuzyaBackend.Services.Interfaces;
+﻿using Kuzya_Backend.Controllers.Recipes.Dto.Requests;
+using Kuzya_Backend.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
-namespace KuzyaBackend.Controllers.Recipes;
+namespace Kuzya_Backend.Controllers.Recipes;
 
 [ApiController]
 [Route("api/v1/recipes")]

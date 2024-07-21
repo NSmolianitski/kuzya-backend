@@ -1,4 +1,4 @@
-﻿namespace KuzyaBackend.Controllers.Recipes.Dto.Requests;
+﻿namespace Kuzya_Backend.Controllers.Recipes.Dto;
 
 public record RecipeStepDto
 (

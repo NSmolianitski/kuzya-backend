@@ -1,7 +1,7 @@
-﻿using KuzyaBackend.Models;
+﻿using Kuzya_Backend.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace KuzyaBackend;
+namespace Kuzya_Backend;
 
 public class ApplicationDbContext : DbContext
 {

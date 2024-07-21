@@ -1,7 +1,6 @@
-﻿using KuzyaBackend.Controllers.Dto;
-using KuzyaBackend.Controllers.Recipes.Dto.Requests;
+﻿using Kuzya_Backend.Controllers.Dto;
 
-namespace KuzyaBackend.Controllers.Recipes.Dto;
+namespace Kuzya_Backend.Controllers.Recipes.Dto.Responses;
 
 public record RecipeDto(
     long Id,

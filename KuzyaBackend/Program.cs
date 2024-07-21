@@ -1,8 +1,8 @@
-using KuzyaBackend;
-using KuzyaBackend.Repositories.Implementations;
-using KuzyaBackend.Repositories.Interfaces;
-using KuzyaBackend.Services.Implementations;
-using KuzyaBackend.Services.Interfaces;
+using Kuzya_Backend;
+using Kuzya_Backend.Repositories.Implementations;
+using Kuzya_Backend.Repositories.Interfaces;
+using Kuzya_Backend.Services.Implementations;
+using Kuzya_Backend.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 

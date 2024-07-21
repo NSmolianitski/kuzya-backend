@@ -1,12 +1,13 @@
-﻿using KuzyaBackend.Controllers.Dto;
-using KuzyaBackend.Controllers.Recipes.Dto;
-using KuzyaBackend.Controllers.Recipes.Dto.Requests;
-using KuzyaBackend.Models;
-using KuzyaBackend.Repositories.Interfaces;
-using KuzyaBackend.Services.Exceptions;
-using KuzyaBackend.Services.Interfaces;
+﻿using Kuzya_Backend.Controllers.Dto;
+using Kuzya_Backend.Controllers.Recipes.Dto;
+using Kuzya_Backend.Controllers.Recipes.Dto.Requests;
+using Kuzya_Backend.Controllers.Recipes.Dto.Responses;
+using Kuzya_Backend.Models;
+using Kuzya_Backend.Repositories.Interfaces;
+using Kuzya_Backend.Services.Exceptions;
+using Kuzya_Backend.Services.Interfaces;
 
-namespace KuzyaBackend.Services.Implementations;
+namespace Kuzya_Backend.Services.Implementations;
 
 public class RecipeService(IRecipeRepository recipeRepository) : IRecipeService
 {

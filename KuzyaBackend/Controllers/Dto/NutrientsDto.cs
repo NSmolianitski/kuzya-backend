@@ -1,4 +1,4 @@
-﻿namespace KuzyaBackend.Controllers.Dto;
+﻿namespace Kuzya_Backend.Controllers.Dto;
 
 public record NutrientsDto(
     double Calories,

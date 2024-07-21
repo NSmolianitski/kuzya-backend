@@ -1,7 +1,7 @@
-﻿using KuzyaBackend.Controllers.Dto;
-using KuzyaBackend.Controllers.Dto.Responses;
+﻿using Kuzya_Backend.Controllers.Ingredients.Dto.Requests;
+using Kuzya_Backend.Controllers.Ingredients.Dto.Responses;
 
-namespace KuzyaBackend.Services.Interfaces;
+namespace Kuzya_Backend.Services.Interfaces;
 
 public interface IIngredientService
 {

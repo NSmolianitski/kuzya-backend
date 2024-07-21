@@ -1,4 +1,4 @@
-﻿namespace KuzyaBackend.Models;
+﻿namespace Kuzya_Backend.Models;
 
 public class Measure
 {

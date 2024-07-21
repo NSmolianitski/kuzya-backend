@@ -1,6 +1,6 @@
-﻿using KuzyaBackend.Models;
+﻿using Kuzya_Backend.Models;
 
-namespace KuzyaBackend.Repositories.Interfaces;
+namespace Kuzya_Backend.Repositories.Interfaces;
 
 public interface IRecipeRepository
 {

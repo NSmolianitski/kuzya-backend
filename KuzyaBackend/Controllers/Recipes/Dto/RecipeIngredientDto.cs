@@ -1,4 +1,4 @@
-﻿namespace KuzyaBackend.Controllers.Recipes.Dto;
+﻿namespace Kuzya_Backend.Controllers.Recipes.Dto;
 
 public record RecipeIngredientDto(
     long IngredientId,

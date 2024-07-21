@@ -1,7 +1,7 @@
-﻿using KuzyaBackend.Controllers.Recipes.Dto;
-using KuzyaBackend.Controllers.Recipes.Dto.Requests;
+﻿using Kuzya_Backend.Controllers.Recipes.Dto.Requests;
+using Kuzya_Backend.Controllers.Recipes.Dto.Responses;
 
-namespace KuzyaBackend.Services.Interfaces;
+namespace Kuzya_Backend.Services.Interfaces;
 
 public interface IRecipeService
 {
