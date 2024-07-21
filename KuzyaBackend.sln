@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KuzyaBackend", "KuzyaBackend\KuzyaBackend.csproj", "{749126EF-BF1B-4FEE-84CA-9AE3FDFADFF4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KuzyaBackend.Tests", "KuzyaBackend.Tests\KuzyaBackend.Tests.csproj", "{10955E87-0DB6-4D1F-A1A8-37394F510E6E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{749126EF-BF1B-4FEE-84CA-9AE3FDFADFF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{749126EF-BF1B-4FEE-84CA-9AE3FDFADFF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{749126EF-BF1B-4FEE-84CA-9AE3FDFADFF4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{10955E87-0DB6-4D1F-A1A8-37394F510E6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10955E87-0DB6-4D1F-A1A8-37394F510E6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10955E87-0DB6-4D1F-A1A8-37394F510E6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10955E87-0DB6-4D1F-A1A8-37394F510E6E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
