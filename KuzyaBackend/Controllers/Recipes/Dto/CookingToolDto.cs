@@ -1,3 +1,3 @@
 ﻿namespace KuzyaBackend.Controllers.Recipes.Dto;
 
-public record RecipeToolDto(long ToolId);
+public record CookingToolDto(long Id);

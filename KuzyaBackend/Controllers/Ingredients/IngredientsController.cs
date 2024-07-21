@@ -15,8 +15,8 @@ public class IngredientsController(IIngredientService ingredientService)
         return new JsonResult(ingredients);
     }
 
-    [HttpGet]
-    public async Task<IActionResult> GetIngredientById(int id)
+    [HttpGet("{id:long}")]
+    public async Task<IActionResult> GetIngredientById(long id)
     {
         var ingredient = await ingredientService.GetIngredientByIdAsync(id);
         return new JsonResult(ingredient);

@@ -15,6 +15,13 @@ public class RecipeController(IRecipeService recipeService)
         return new JsonResult(ingredients);
     }
     
+    [HttpGet("{id:long}")]
+    public async Task<IActionResult> GetRecipeById(long id)
+    {
+        var ingredient = await recipeService.GetRecipeByIdAsync(id);
+        return new JsonResult(ingredient);
+    }
+    
     [HttpPost]
     public async Task<IActionResult> CreateRecipe([FromBody] CreateRecipeDto createRecipeDto)
     {

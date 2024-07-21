@@ -8,5 +8,7 @@ public record CreateRecipeDto(
     int CookingTimeInMinutes,
     int NumberOfServings,
     long AvatarId,
-    List<RecipeIngredientDto> Ingredients,
-    List<RecipeToolDto> Tools);
+    IEnumerable<RecipeIngredientDto> Ingredients,
+    IEnumerable<RecipeStepDto> InstructionSteps,
+    IEnumerable<CookingToolDto> CookingTools
+);

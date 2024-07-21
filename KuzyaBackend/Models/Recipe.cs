@@ -11,6 +11,7 @@ public class Recipe
 
     public ICollection<RecipeIngredient> RecipeIngredients { get; set; } = [];
     public ICollection<RecipeStep> RecipeSteps { get; set; } = [];
+    public ICollection<RecipeCookingTool> CookingTools { get; set; } = [];
     
     // Nutrients
     public double Calories { get; set; }

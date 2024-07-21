@@ -8,12 +8,19 @@ public class ApplicationDbContext : DbContext
     public DbSet<Ingredient> Ingredients { get; init; } = null!;
     public DbSet<Recipe> Recipes { get; init; } = null!;
     public DbSet<RecipeStep> RecipeSteps { get; init; } = null!;
-    public DbSet<RecipeIngredient> RecipeIngredients { get; init; } = null!;
+    public DbSet<RecipeIngredient> RecipeIngredient { get; init; } = null!;
+    public DbSet<CookingTool> CookingTools { get; init; } = null!;
+    public DbSet<RecipeCookingTool> RecipeCookingTool { get; init; } = null!;
 
+    private static bool _isInitialized = false;
+    
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
     {
+        if (_isInitialized) return;
+        
         Database.EnsureDeleted();
         Database.EnsureCreated();
+        _isInitialized = true;
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -78,7 +85,22 @@ public class ApplicationDbContext : DbContext
         };
         modelBuilder.Entity<Measure>().HasData(grams);
 
-        var recipe = new Recipe
+        var mixer = new CookingTool
+        {
+            Id = 1,
+            Name = "Mixer",
+            AvatarId = 1
+        };
+        var knife = new CookingTool
+        {
+            Id = 2,
+            Name = "Knife",
+            AvatarId = 2
+        };
+        modelBuilder.Entity<CookingTool>().HasData(mixer, knife);
+        
+        // Apple Pie Recipe
+        var appleRecipe = new Recipe
         {
             Id = 1,
             Name = "Apple Pie",
@@ -90,23 +112,60 @@ public class ApplicationDbContext : DbContext
             Fats = 10,
             Carbohydrates = 10
         };
-        modelBuilder.Entity<Recipe>().HasData(recipe);
+        modelBuilder.Entity<Recipe>().HasData(appleRecipe);
         
-        var recipeIngredient = new RecipeIngredient
+        var appleRecipeIngredient = new RecipeIngredient
         {
             Id = 1,
-            RecipeId = recipe.Id,
+            RecipeId = appleRecipe.Id,
             IngredientId = apple.Id,
             MeasureId = grams.Id,
             Amount = 800f
         };
-        modelBuilder.Entity<RecipeIngredient>().HasData(recipeIngredient);
+        modelBuilder.Entity<RecipeIngredient>().HasData(appleRecipeIngredient);
         
-        var recipeSteps = new[]
+        var applePieRecipeSteps = new[]
         {
-            new RecipeStep {Id = 1, RecipeId = recipe.Id, Order = 1, Description = "Cut the apple"},
-            new RecipeStep {Id = 2, RecipeId = recipe.Id, Order = 2, Description = "Make the pie"}
+            new RecipeStep {Id = 1, RecipeId = appleRecipe.Id, Order = 1, Description = "Cut the apple"},
+            new RecipeStep {Id = 2, RecipeId = appleRecipe.Id, Order = 2, Description = "Make the pie"}
         };
-        modelBuilder.Entity<RecipeStep>().HasData(recipeSteps);
+        modelBuilder.Entity<RecipeStep>().HasData(applePieRecipeSteps);
+        
+        // Chopped Banana Recipe
+        var bananaRecipe = new Recipe
+        {
+            Id = 2,
+            Name = "Chopped Banana",
+            AvatarId = 1,
+            CookingTimeInMinutes = 5,
+            Servings = 2,
+            Calories = 100,
+            Proteins = 10,
+            Fats = 10,
+            Carbohydrates = 10
+        };
+        modelBuilder.Entity<Recipe>().HasData(bananaRecipe);
+        
+        var bananaRecipeIngredient = new RecipeIngredient
+        {
+            Id = 2,
+            RecipeId = bananaRecipe.Id,
+            IngredientId = banana.Id,
+            MeasureId = grams.Id,
+            Amount = 400f
+        };
+        modelBuilder.Entity<RecipeIngredient>().HasData(bananaRecipeIngredient);
+        
+        var bananaRecipeSteps = new[]
+        {
+            new RecipeStep {Id = 3, RecipeId = bananaRecipe.Id, Order = 1, Description = "Cut the banana"}
+        };
+        modelBuilder.Entity<RecipeStep>().HasData(bananaRecipeSteps);
+        
+        // Add recipe cooking tools
+        var mixerApplePie = new RecipeCookingTool { Id = 1, RecipeId = appleRecipe.Id, CookingToolId = mixer.Id };
+        var knifeApplePie = new RecipeCookingTool { Id = 2, RecipeId = appleRecipe.Id, CookingToolId = knife.Id };
+        var knifeBanana = new RecipeCookingTool { Id = 3, RecipeId = bananaRecipe.Id, CookingToolId = knife.Id };
+        modelBuilder.Entity<RecipeCookingTool>().HasData(mixerApplePie, knifeApplePie, knifeBanana);
     }
 }
