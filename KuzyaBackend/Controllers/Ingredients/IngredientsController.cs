@@ -9,16 +9,23 @@ namespace KuzyaBackend.Controllers;
 public class IngredientsController(IIngredientService ingredientService)
 {
     [HttpGet]
-    public IActionResult GetAllIngredients()
+    public async Task<IActionResult> GetAllIngredients()
     {
-        var ingredients = ingredientService.GetAllIngredients();
+        var ingredients = await ingredientService.GetAllIngredientsAsync();
         return new JsonResult(ingredients);
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> GetIngredientById(int id)
+    {
+        var ingredient = await ingredientService.GetIngredientByIdAsync(id);
+        return new JsonResult(ingredient);
     }
     
     [HttpPost]
-    public IActionResult CreateIngredient([FromBody] CreateIngredientDto createIngredientDto)
+    public async Task<IActionResult> CreateIngredient([FromBody] CreateIngredientDto createIngredientDto)
     {
-        var ingredientDto = ingredientService.CreateIngredient(createIngredientDto);
+        var ingredientDto = await ingredientService.CreateIngredientAsync(createIngredientDto);
         return new CreatedResult(nameof(CreateIngredient), ingredientDto);
     }
 }

@@ -18,7 +18,7 @@ public class IngredientServiceTests
     }
 
     [Fact]
-    public void GetAllIngredients_ReturnsListOfIngredientDto()
+    public async Task GetAllIngredients_ReturnsListOfIngredientDto()
     {
         // Arrange
         var ingredients = new List<Ingredient>
@@ -32,11 +32,11 @@ public class IngredientServiceTests
                 Id = 100, Name = "Banana", AvatarId = 124, Calories = 200, Proteins = 5, Fats = 1, Carbohydrates = 20
             }
         };
-        _mockIngredientRepository.Setup(r => r.GetAll())
-            .Returns(ingredients.AsQueryable());
+        _mockIngredientRepository.Setup(r => r.GetAllAsync())
+            .ReturnsAsync(ingredients);
 
         // Act
-        var result = _ingredientService.GetAllIngredients();
+        var result = await _ingredientService.GetAllIngredientsAsync();
 
         // Assert
         Assert.NotNull(result);
@@ -65,7 +65,7 @@ public class IngredientServiceTests
     }
 
     [Fact]
-    public void CreateIngredient_ReturnsIngredientDto()
+    public async Task CreateIngredient_ReturnsIngredientDto()
     {
         // Arrange
         var nutrients = new NutrientsDto(100, 10, 10, 10);
@@ -74,11 +74,11 @@ public class IngredientServiceTests
         {
             Id = 54, Name = "Apple", AvatarId = 98, Calories = 100, Proteins = 10, Fats = 11, Carbohydrates = 12
         };
-        _mockIngredientRepository.Setup(r => r.Create(It.IsAny<Ingredient>()))
-            .Returns(ingredientFromRepo);
+        _mockIngredientRepository.Setup(r => r.CreateAsync(It.IsAny<Ingredient>()))
+            .ReturnsAsync(ingredientFromRepo);
 
         // Act
-        var result = _ingredientService.CreateIngredient(createIngredientDto);
+        var result = await _ingredientService.CreateIngredientAsync(createIngredientDto);
 
         // Assert
         Assert.NotNull(result);

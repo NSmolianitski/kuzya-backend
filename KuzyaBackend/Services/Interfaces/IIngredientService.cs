@@ -5,6 +5,7 @@ namespace KuzyaBackend.Services.Interfaces;
 
 public interface IIngredientService
 {
-    IEnumerable<IngredientDto> GetAllIngredients();
-    IngredientDto CreateIngredient(CreateIngredientDto createIngredientDto);
+    Task<IEnumerable<IngredientDto>> GetAllIngredientsAsync();
+    Task<IngredientDto> GetIngredientByIdAsync(long id);
+    Task<IngredientDto> CreateIngredientAsync(CreateIngredientDto createIngredientDto);
 }

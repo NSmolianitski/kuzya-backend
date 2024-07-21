@@ -4,7 +4,7 @@ namespace KuzyaBackend.Repositories.Interfaces;
 
 public interface IIngredientRepository
 {
-    IQueryable<Ingredient> GetAll();
-    Ingredient? GetByIdAsync(long id);
-    Ingredient Create(Ingredient ingredient);
+    Task<IEnumerable<Ingredient>> GetAllAsync();
+    Task<Ingredient?> TryGetByIdAsync(long id);
+    Task<Ingredient> CreateAsync(Ingredient ingredient);
 }

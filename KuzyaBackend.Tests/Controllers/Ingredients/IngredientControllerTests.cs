@@ -29,8 +29,8 @@ public class IngredientControllerTests
     {
         // Arrange
         _mockIngredientService
-            .Setup(s => s.GetAllIngredients())
-            .Returns(_ingredients);
+            .Setup(s => s.GetAllIngredientsAsync())
+            .ReturnsAsync(_ingredients);
 
         // Act
         var result = _controller.GetAllIngredients();
@@ -60,8 +60,8 @@ public class IngredientControllerTests
         );
 
         _mockIngredientService
-            .Setup(s => s.CreateIngredient(createIngredientDto))
-            .Returns(responseIngredientDto);
+            .Setup(s => s.CreateIngredientAsync(createIngredientDto))
+            .ReturnsAsync(responseIngredientDto);
 
         // Act
         var result = _controller.CreateIngredient(createIngredientDto);

@@ -1,24 +1,25 @@
 ﻿using KuzyaBackend.Models;
 using KuzyaBackend.Repositories.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace KuzyaBackend.Repositories.Implementations;
 
 public class IngredientRepository(ApplicationDbContext db) : IIngredientRepository
 {
-    public IQueryable<Ingredient> GetAll()
+    public async Task<IEnumerable<Ingredient>> GetAllAsync()
     {
-        return db.Ingredients;
+        return await db.Ingredients.ToListAsync();
     }
 
-    public Ingredient? GetByIdAsync(long id)
+    public Task<Ingredient?> TryGetByIdAsync(long id)
     {
-        return db.Ingredients.SingleOrDefault(i => i.Id == id);
+        return db.Ingredients.SingleOrDefaultAsync(i => i.Id == id);
     }
 
-    public Ingredient Create(Ingredient ingredient)
+    public async Task<Ingredient> CreateAsync(Ingredient ingredient)
     {
         ingredient = db.Ingredients.Add(ingredient).Entity;
-        db.SaveChanges();
+        await db.SaveChangesAsync();
         return ingredient;
     }
 }

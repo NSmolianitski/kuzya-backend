@@ -2,18 +2,29 @@
 using KuzyaBackend.Controllers.Dto.Responses;
 using KuzyaBackend.Models;
 using KuzyaBackend.Repositories.Interfaces;
+using KuzyaBackend.Services.Exceptions;
 using KuzyaBackend.Services.Interfaces;
 
 namespace KuzyaBackend.Services.Implementations;
 
 public class IngredientService(IIngredientRepository ingredientRepository) : IIngredientService
 {
-    public IEnumerable<IngredientDto> GetAllIngredients()
+    public async Task<IEnumerable<IngredientDto>> GetAllIngredientsAsync()
     {
-        return ingredientRepository.GetAll().AsEnumerable().Select(MapIngredientToDto);
+        var ingredients = await ingredientRepository.GetAllAsync();
+        return ingredients.Select(MapIngredientToDto);
     }
-
-    public IngredientDto CreateIngredient(CreateIngredientDto createIngredientDto)
+    
+    public async Task<IngredientDto> GetIngredientByIdAsync(long id)
+    {
+        var ingredient = await ingredientRepository.TryGetByIdAsync(id);
+        if (ingredient is null)
+            throw new NoSuchEntityInDatabaseException($"Ingredient with id {id} doesn't exist");
+        
+        return MapIngredientToDto(ingredient);
+    }
+    
+    public async Task<IngredientDto> CreateIngredientAsync(CreateIngredientDto createIngredientDto)
     {
         var ingredient = new Ingredient
         {
@@ -25,11 +36,11 @@ public class IngredientService(IIngredientRepository ingredientRepository) : IIn
             Carbohydrates = createIngredientDto.Nutrients.Carbohydrates
         };
 
-        var createdIngredient = ingredientRepository.Create(ingredient);
+        var createdIngredient = await ingredientRepository.CreateAsync(ingredient);
         return MapIngredientToDto(createdIngredient);
     }
 
-    private IngredientDto MapIngredientToDto(Ingredient ingredient)
+    private static IngredientDto MapIngredientToDto(Ingredient ingredient)
     {
         return new IngredientDto(
             ingredient.Id,
