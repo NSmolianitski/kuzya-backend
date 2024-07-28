@@ -56,7 +56,7 @@ if (app.Environment.IsDevelopment())
 
 // app.UseExceptionHandler(); // TODO: add global exception handler
 
-app.UseHttpsRedirection();
+// app.UseHttpsRedirection();
 app.MapControllers();
 
 app.Run();
