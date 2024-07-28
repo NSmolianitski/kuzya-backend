@@ -1,8 +1,8 @@
-﻿using Kuzya_Backend.Controllers.Dto;
-using Kuzya_Backend.Controllers.Ingredients;
-using Kuzya_Backend.Controllers.Ingredients.Dto.Requests;
-using Kuzya_Backend.Controllers.Ingredients.Dto.Responses;
-using Kuzya_Backend.Services.Interfaces;
+﻿using KuzyaBackend.Controllers.Dto;
+using KuzyaBackend.Controllers.Ingredients;
+using KuzyaBackend.Controllers.Ingredients.Dto.Requests;
+using KuzyaBackend.Controllers.Ingredients.Dto.Responses;
+using KuzyaBackend.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 

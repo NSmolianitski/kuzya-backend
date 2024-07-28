@@ -1,8 +1,8 @@
-﻿using Kuzya_Backend.Controllers.Dto;
-using Kuzya_Backend.Controllers.Ingredients.Dto.Requests;
-using Kuzya_Backend.Models;
-using Kuzya_Backend.Repositories.Interfaces;
-using Kuzya_Backend.Services.Implementations;
+﻿using KuzyaBackend.Controllers.Dto;
+using KuzyaBackend.Controllers.Ingredients.Dto.Requests;
+using KuzyaBackend.Models;
+using KuzyaBackend.Repositories.Interfaces;
+using KuzyaBackend.Services.Implementations;
 using Moq;
 
 namespace KuzyaBackend.Tests.Services.Implementations;

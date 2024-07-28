@@ -24,7 +24,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\KuzyaBackend\KuzyaBackend.csproj" />
+      <ProjectReference Include="..\KuzyaBackend.Core\KuzyaBackend.Core.csproj" />
     </ItemGroup>
 
 </Project>
