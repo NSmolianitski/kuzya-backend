@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\KuzyaBackend.Web.DTOs\KuzyaBackend.Web.DTOs.csproj" />
+      <ProjectReference Include="..\KuzyaBackend.DataAccess.Models\KuzyaBackend.DataAccess.Models.csproj" />
+      <ProjectReference Include="..\KuzyaBackend.DataAccess\KuzyaBackend.DataAccess.csproj" />
+    </ItemGroup>
+
+</Project>
