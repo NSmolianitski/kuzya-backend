@@ -26,12 +26,14 @@ public static class ServiceCollectionExtensions
     {
         services.AddScoped<IIngredientRepository, IngredientRepository>();
         services.AddScoped<IRecipeRepository, RecipeRepository>();
+        services.AddScoped<IMealListRepository, MealListRepository>();
         return services;
     }
     public static IServiceCollection AddServices(this IServiceCollection services)
     {
         services.AddScoped<IIngredientService, IngredientService>();
         services.AddScoped<IRecipeService, RecipeService>();
+        services.AddScoped<IMealListService, MealListService>();
         return services;
     }
 }

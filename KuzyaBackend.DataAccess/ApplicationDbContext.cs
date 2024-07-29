@@ -11,13 +11,16 @@ public class ApplicationDbContext : DbContext
     public DbSet<RecipeIngredient> RecipeIngredient { get; init; } = null!;
     public DbSet<CookingTool> CookingTools { get; init; } = null!;
     public DbSet<RecipeCookingTool> RecipeCookingTool { get; init; } = null!;
+    public DbSet<MealList> MealLists { get; init; } = null!;
+    public DbSet<MealGroup> MealGroups { get; init; } = null!;
+    public DbSet<MealGroupRecipe> MealGroupRecipes { get; init; } = null!;
 
     private static bool _isInitialized = false;
-    
+
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
     {
         if (_isInitialized) return;
-        
+
         Database.EnsureDeleted();
         Database.EnsureCreated();
         _isInitialized = true;
@@ -35,12 +38,12 @@ public class ApplicationDbContext : DbContext
             .HasMany(r => r.RecipeIngredients)
             .WithOne(i => i.Recipe)
             .HasForeignKey(i => i.RecipeId).IsRequired();
-        
+
         modelBuilder.Entity<Recipe>()
             .HasMany(r => r.RecipeSteps)
             .WithOne(step => step.Recipe)
             .HasForeignKey(step => step.RecipeId).IsRequired();
-        
+
         modelBuilder.Entity<RecipeIngredient>()
             .HasOne(ri => ri.Ingredient)
             .WithMany()
@@ -51,7 +54,7 @@ public class ApplicationDbContext : DbContext
             .WithMany()
             .HasForeignKey(ri => ri.MeasureId).IsRequired();
     }
-    
+
     private void AddTestingData(ModelBuilder modelBuilder)
     {
         var apple = new Ingredient
@@ -64,7 +67,7 @@ public class ApplicationDbContext : DbContext
             Fats = 10,
             Carbohydrates = 10
         };
-        
+
         var banana = new Ingredient
         {
             Id = 2,
@@ -98,7 +101,7 @@ public class ApplicationDbContext : DbContext
             AvatarId = 2
         };
         modelBuilder.Entity<CookingTool>().HasData(mixer, knife);
-        
+
         // Apple Pie Recipe
         var appleRecipe = new Recipe
         {
@@ -113,7 +116,7 @@ public class ApplicationDbContext : DbContext
             Carbohydrates = 10
         };
         modelBuilder.Entity<Recipe>().HasData(appleRecipe);
-        
+
         var appleRecipeIngredient = new RecipeIngredient
         {
             Id = 1,
@@ -123,14 +126,14 @@ public class ApplicationDbContext : DbContext
             Amount = 800f
         };
         modelBuilder.Entity<RecipeIngredient>().HasData(appleRecipeIngredient);
-        
+
         var applePieRecipeSteps = new[]
         {
             new RecipeStep {Id = 1, RecipeId = appleRecipe.Id, Order = 1, Description = "Cut the apple"},
             new RecipeStep {Id = 2, RecipeId = appleRecipe.Id, Order = 2, Description = "Make the pie"}
         };
         modelBuilder.Entity<RecipeStep>().HasData(applePieRecipeSteps);
-        
+
         // Chopped Banana Recipe
         var bananaRecipe = new Recipe
         {
@@ -145,7 +148,7 @@ public class ApplicationDbContext : DbContext
             Carbohydrates = 10
         };
         modelBuilder.Entity<Recipe>().HasData(bananaRecipe);
-        
+
         var bananaRecipeIngredient = new RecipeIngredient
         {
             Id = 2,
@@ -155,17 +158,106 @@ public class ApplicationDbContext : DbContext
             Amount = 400f
         };
         modelBuilder.Entity<RecipeIngredient>().HasData(bananaRecipeIngredient);
-        
+
         var bananaRecipeSteps = new[]
         {
             new RecipeStep {Id = 3, RecipeId = bananaRecipe.Id, Order = 1, Description = "Cut the banana"}
         };
         modelBuilder.Entity<RecipeStep>().HasData(bananaRecipeSteps);
-        
+
         // Add recipe cooking tools
-        var mixerApplePie = new RecipeCookingTool { Id = 1, RecipeId = appleRecipe.Id, CookingToolId = mixer.Id };
-        var knifeApplePie = new RecipeCookingTool { Id = 2, RecipeId = appleRecipe.Id, CookingToolId = knife.Id };
-        var knifeBanana = new RecipeCookingTool { Id = 3, RecipeId = bananaRecipe.Id, CookingToolId = knife.Id };
+        var mixerApplePie = new RecipeCookingTool {Id = 1, RecipeId = appleRecipe.Id, CookingToolId = mixer.Id};
+        var knifeApplePie = new RecipeCookingTool {Id = 2, RecipeId = appleRecipe.Id, CookingToolId = knife.Id};
+        var knifeBanana = new RecipeCookingTool {Id = 3, RecipeId = bananaRecipe.Id, CookingToolId = knife.Id};
         modelBuilder.Entity<RecipeCookingTool>().HasData(mixerApplePie, knifeApplePie, knifeBanana);
+
+        // Add meal lists
+        var breakfastList = new MealList
+        {
+            Id = 1,
+            Name = "Monday"
+        };
+        var lunchList = new MealList
+        {
+            Id = 2,
+            Name = "Tuesday"
+        };
+        modelBuilder.Entity<MealList>().HasData(breakfastList, lunchList);
+        
+        // Add meal groups
+        var breakfast = new MealGroup
+        {
+            Id = 1,
+            Name = "Breakfast",
+            MealListId = breakfastList.Id
+        };
+        var lunch = new MealGroup
+        {
+            Id = 2,
+            Name = "Lunch",
+            MealListId = breakfastList.Id
+        };
+        var dinner = new MealGroup
+        {
+            Id = 3,
+            Name = "Dinner",
+            MealListId = lunchList.Id
+        };
+        modelBuilder.Entity<MealGroup>().HasData(breakfast, lunch, dinner);
+
+        // Add meal group recipes
+        var applePieBreakfast = new MealGroupRecipe
+        {
+            Id = 1,
+            RecipeId = appleRecipe.Id,
+            MealGroupId = breakfast.Id,
+            Order = 1
+        };
+        var bananaBreakfast = new MealGroupRecipe
+        {
+            Id = 2,
+            RecipeId = bananaRecipe.Id,
+            MealGroupId = breakfast.Id,
+            Order = 2
+        };
+
+        var applePieLunch = new MealGroupRecipe
+        {
+            Id = 3,
+            RecipeId = appleRecipe.Id,
+            MealGroupId = lunch.Id,
+            Order = 1
+        };
+        var bananaLunch = new MealGroupRecipe
+        {
+            Id = 4,
+            RecipeId = bananaRecipe.Id,
+            MealGroupId = lunch.Id,
+            Order = 2
+        };
+
+        var applePieDinner = new MealGroupRecipe
+        {
+            Id = 5,
+            RecipeId = appleRecipe.Id,
+            MealGroupId = dinner.Id,
+            Order = 1
+        };
+        var bananaDinner = new MealGroupRecipe
+        {
+            Id = 6,
+            RecipeId = bananaRecipe.Id,
+            MealGroupId = dinner.Id,
+            Order = 2
+        };
+
+        modelBuilder.Entity<MealGroupRecipe>().HasData(
+            applePieBreakfast,
+            bananaBreakfast,
+            applePieLunch,
+            applePieDinner,
+            bananaLunch,
+            bananaDinner
+        );
     }
 }
