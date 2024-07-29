@@ -11,6 +11,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KuzyaBackend.Web.DTOs", "KuzyaBackend.Web.DTOs\KuzyaBackend.Web.DTOs.csproj", "{494FB396-FD2B-411C-A61A-4911B41B9ACC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{FE566FA2-598F-4DF2-8C11-7789BB4B2E50}"
+	ProjectSection(SolutionItems) = preProject
+		Dockerfile = Dockerfile
+		.dockerignore = .dockerignore
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{61251823-06BB-42B4-BF13-D517056CF23B}"
 EndProject
