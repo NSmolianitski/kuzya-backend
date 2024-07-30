@@ -5,7 +5,7 @@ EXPOSE 8080
 EXPOSE 8081
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
-ARG BUILD_CONFIGURATION=Release
+ARG BUILD_CONFIGURATION=Debug
 WORKDIR /src
 COPY ["KuzyaBackend.Web/KuzyaBackend.Web.csproj", "KuzyaBackend.Web/"]
 COPY ["KuzyaBackend.DataAccess/KuzyaBackend.DataAccess.csproj", "KuzyaBackend.DataAccess/"]
@@ -18,7 +18,7 @@ WORKDIR "/src/KuzyaBackend.Web"
 RUN dotnet build "KuzyaBackend.Web.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish
-ARG BUILD_CONFIGURATION=Release
+ARG BUILD_CONFIGURATION=Debug
 RUN dotnet publish "KuzyaBackend.Web.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 FROM base AS final

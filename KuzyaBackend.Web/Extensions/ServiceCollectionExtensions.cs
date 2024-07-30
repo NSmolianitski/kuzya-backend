@@ -9,15 +9,19 @@ namespace KuzyaBackend.Web.Extensions;
 
 public static class ServiceCollectionExtensions
 {
-    public static IServiceCollection AddDatabaseContext(this IServiceCollection services)
+    public static IServiceCollection AddDatabaseContext(this IServiceCollection services, string? connectionString)
     {
-        var host = Environment.GetEnvironmentVariable("DATABASE_HOST");
-        var port = Environment.GetEnvironmentVariable("DATABASE_PORT");
-        var database = Environment.GetEnvironmentVariable("DATABASE_NAME");
-        var user = Environment.GetEnvironmentVariable("DATABASE_USER");
-        var password = Environment.GetEnvironmentVariable("DATABASE_PASSWORD");
+        if (connectionString is null)
+        {
+            var host = Environment.GetEnvironmentVariable("DATABASE_HOST");
+            var port = Environment.GetEnvironmentVariable("DATABASE_PORT");
+            var database = Environment.GetEnvironmentVariable("DATABASE_NAME");
+            var user = Environment.GetEnvironmentVariable("DATABASE_USER");
+            var password = Environment.GetEnvironmentVariable("DATABASE_PASSWORD");
 
-        var connectionString = $"Host={host};Port={port};Database={database};Username={user};Password={password};";
+            connectionString = $"Host={host};Port={port};Database={database};Username={user};Password={password};";
+        }
+
         services.AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(connectionString));
         return services;
     }

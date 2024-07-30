@@ -7,12 +7,7 @@
       "launchUrl": "api",
       "applicationUrl": "https://localhost:8081;http://localhost:8080",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development",
-        "DATABASE_HOST": "localhost",
-        "DATABASE_PORT": "5432",
-        "DATABASE_NAME": "KuzyaDatabase",
-        "DATABASE_USER": "admin",
-        "DATABASE_PASSWORD": "password"
+        "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
     "production": {

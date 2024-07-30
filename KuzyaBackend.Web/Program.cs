@@ -15,9 +15,11 @@ builder.Services.AddSwaggerGen(options =>
 builder.Services.AddControllers();
 
 builder.Configuration.AddEnvironmentVariables();
-builder.Configuration.AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json");
+builder.Configuration.AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true);
 
-builder.Services.AddDatabaseContext();
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddDatabaseContext(connectionString);
+
 builder.Services.AddRepositories();
 builder.Services.AddServices();
 
